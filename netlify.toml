@@ -4,3 +4,5 @@
 
 [build.environment]
   NODE_VERSION = "22"
+  # react-tilt declares React 18 peers but works on 19; mirrors .npmrc for uploads that drop dotfiles.
+  NPM_FLAGS = "--legacy-peer-deps"
