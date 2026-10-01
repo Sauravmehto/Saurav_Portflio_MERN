@@ -55,7 +55,7 @@ A personal portfolio built with Next.js 16, React 19 and Three.js. It has intera
 | Motion | Framer Motion, GSAP, Lenis |
 | Data | Prisma 7, PostgreSQL (Neon), Zod |
 | Email | Resend (optional) |
-| Analytics | Vercel Analytics, Speed Insights |
+| Hosting | Netlify |
 
 ## Getting started
 
@@ -92,7 +92,7 @@ To approve a guestbook note, set `approved` to `true` on its row in the `Note` t
 | `DATABASE_URL` | No | Postgres connection string for the contact form and guestbook. |
 | `RESEND_API_KEY` | No | Also emails contact-form messages to you. Saving still works without it. |
 | `RESEND_FROM` | No | Verified sender, e.g. `Portfolio <hello@yourdomain.com>`. |
-| `NEXT_PUBLIC_SITE_URL` | No | Absolute site URL for Open Graph tags and the sitemap. Defaults to localhost. |
+| `NEXT_PUBLIC_SITE_URL` | No | Absolute site URL for Open Graph tags and the sitemap. Falls back to Netlify's site URL, then localhost. |
 | `GITHUB_TOKEN` | No | Raises the GitHub API rate limit for the Playground repo list. |
 
 ## Scripts
@@ -130,7 +130,9 @@ public/               # 3D models and resume
 
 ## Deployment
 
-The site is set up for [Vercel](https://vercel.com). Import the repository, set the environment variables above, and deploy. The footer shows the short commit SHA and build date of the deployed version.
+The site deploys on [Netlify](https://www.netlify.com), which detects Next.js automatically. Build settings are in [`netlify.toml`](netlify.toml), so you only need to import the repository and add the environment variables above in the Netlify UI. If `NEXT_PUBLIC_SITE_URL` isn't set, the site falls back to Netlify's primary site URL.
+
+The footer shows the short commit SHA and build date of the deployed version.
 
 ## Credits
 
