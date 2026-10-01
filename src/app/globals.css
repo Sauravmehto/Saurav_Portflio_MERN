@@ -1,0 +1,168 @@
+@import "tailwindcss";
+
+/*
+  Violet system shared by light and dark. Dark (#050816 / #915EFF) is the
+  primary experience; light keeps the same accent and does not use blue.
+*/
+
+:root {
+  --background: #f6f4fb;
+  --foreground: #1a1230;
+  --surface: #ffffff;
+  --surface-muted: #efeaf8;
+  --border: #ddd4f0;
+  --accent: #7c3aed;
+  --accent-foreground: #ffffff;
+  --muted-foreground: #5c5478;
+}
+
+:root[data-theme="dark"] {
+  --background: #050816;
+  --foreground: #f4f1fb;
+  --surface: #151030;
+  --surface-muted: #1d1836;
+  --border: #2d2654;
+  --accent: #915eff;
+  --accent-foreground: #050816;
+  --muted-foreground: #aaa6c3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* "this is live" dot on project cards; same easeInOut curve as the About avatar's glow pulse */
+  --animate-live-pulse: live-pulse 2s cubic-bezier(0.42, 0, 0.58, 1) infinite;
+
+  @keyframes live-pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.6);
+      opacity: 0.45;
+    }
+  }
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+/*
+  Safety net: the page must never scroll sideways. `clip` rather than
+  `hidden` — overflow-x: hidden on body can turn body into its own scroll
+  container, which breaks window scroll listeners (Lenis, the nav's
+  scrolled state) and position: sticky. Not `max-width: 100vw` either:
+  100vw includes the scrollbar on Windows, so it overflows by itself.
+  (box-sizing: border-box is already global via Tailwind's preflight.)
+  Real overflow sources are still fixed at the source — sections clip
+  their own decorative glows with overflow-x-clip.
+*/
+html,
+body {
+  overflow-x: clip;
+}
+
+body {
+  background: var(--color-background);
+  color: var(--color-foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Hide native cursor for pointer devices when custom cursor is active */
+@media (hover: hover) and (pointer: fine) {
+  html.custom-cursor-active,
+  html.custom-cursor-active * {
+    cursor: none !important;
+  }
+}
+
+/* Subtle grain/noise overlay, "designed by a human" feel */
+.grain-overlay {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.04;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.gradient-text {
+  background-image: linear-gradient(90deg, var(--color-accent), #c4b5fd);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.violet-line {
+  background: linear-gradient(to bottom, var(--color-accent), transparent);
+}
+
+@keyframes marquee-left {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  from {
+    transform: translateX(-50%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.marquee-left {
+  animation: marquee-left 38s linear infinite;
+}
+
+.marquee-right {
+  animation: marquee-right 44s linear infinite;
+}
+
+.marquee-paused .marquee-left,
+.marquee-paused .marquee-right {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .marquee-left,
+  .marquee-right {
+    animation: none;
+  }
+}
