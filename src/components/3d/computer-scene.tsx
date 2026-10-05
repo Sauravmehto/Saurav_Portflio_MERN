@@ -5,19 +5,19 @@ import { Canvas } from "@react-three/fiber";
 import { Clone, OrbitControls, Preload, useGLTF } from "@react-three/drei";
 
 function Computer() {
-  const { scene } = useGLTF("/desktop_pc/scene.gltf");
+  const { scene } = useGLTF("/desktop_pc/scene.glb");
 
   return (
     <Clone
       object={scene}
-      scale={0.75}
-      position={[1.1, -3.25, -1.5]}
+      scale={0.55}
+      position={[1.1, -2.3, -1.3]}
       rotation={[-0.01, -0.2, -0.1]}
     />
   );
 }
 
-useGLTF.preload("/desktop_pc/scene.gltf");
+useGLTF.preload("/desktop_pc/scene.glb");
 
 export function ComputerScene() {
   return (

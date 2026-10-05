@@ -8,7 +8,7 @@ import { SiGithub } from "react-icons/si";
 import { Magnetic } from "@/components/motion/magnetic";
 import { ParallaxGlow } from "@/components/motion/parallax-glow";
 import { ContactForm } from "./contact-form";
-import { ContactCanvas } from "@/components/3d/contact-canvas";
+import { ContactVisual } from "./contact-visual";
 import { siteConfig } from "@/lib/site-config";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
@@ -195,7 +195,7 @@ export function Contact() {
           </motion.p>
         </div>
         <div className="relative mx-auto hidden aspect-square w-full max-w-xl max-h-xl lg:block" aria-hidden>
-          <ContactCanvas />
+          <ContactVisual />
         </div>
       </div>
     </section>

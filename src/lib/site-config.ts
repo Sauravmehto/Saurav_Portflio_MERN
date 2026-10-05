@@ -82,7 +82,8 @@ export const siteConfig = {
 
   // ---------- About ----------
   yearsExperience: 4,
-  avatarUrl: "", // TODO(saurav): set to "/avatar.jpg" (or similar) once you add a real headshot to /public
+  avatarUrl: "/saurav-avatar.webp",
+  avatarPosterUrl: "/saurav-avatar-poster.webp",
   bio: [
     "I'm a Full Stack and AI Software Engineer with close to four years of experience building enterprise web platforms, AI-powered applications, and scalable FastAPI/Python backends. Over that time I've moved from classic MERN work into hands-on applied-AI engineering — agentic workflows, LLM integration, and prompt engineering — without losing the full-stack fundamentals that got me here.",
     "At Data Alpha AI, I've owned four production AI products end-to-end — portfolio analytics, financial-data infrastructure, natural-language BI, and go-to-market automation — from requirements through React/Vite frontends, Claude API orchestration, and Docker/VPS deployment. I care about taking an idea to a working demo in days, not weeks.",

@@ -18,7 +18,7 @@ export function AnimatedAvatar() {
     .join("");
 
   return (
-    <div className="relative mx-auto aspect-square w-full max-w-xs">
+    <div className="relative mx-auto aspect-square w-full max-w-[13rem] sm:max-w-[16rem] lg:max-w-xs">
       <motion.div
         aria-hidden
         className="absolute inset-0 rounded-full bg-gradient-to-br from-accent/50 via-accent/10 to-transparent blur-2xl"
@@ -33,11 +33,12 @@ export function AnimatedAvatar() {
       <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-border bg-surface/80 backdrop-blur">
         {siteConfig.avatarUrl ? (
           <Image
-            src={siteConfig.avatarUrl}
+            src={reducedMotion && siteConfig.avatarPosterUrl ? siteConfig.avatarPosterUrl : siteConfig.avatarUrl}
             alt={siteConfig.name}
             fill
-            sizes="320px"
-            className="object-cover"
+            unoptimized
+            sizes="(min-width: 1024px) 320px, (min-width: 640px) 256px, 208px"
+            className="object-cover object-top"
           />
         ) : (
           <span className="font-mono text-5xl font-semibold text-accent">

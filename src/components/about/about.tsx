@@ -40,7 +40,7 @@ export function About() {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.4 }}
             transition={{ duration: 0.6, ease: "easeOut" }}
-            className="flex items-center justify-center rounded-2xl border border-border bg-surface/80 p-8"
+            className="flex items-center justify-center rounded-2xl border border-border bg-surface/80 p-6 sm:p-8"
           >
             <AnimatedAvatar />
           </motion.div>

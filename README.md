@@ -25,7 +25,7 @@ A personal portfolio built with Next.js 16, React 19 and Three.js. It has intera
 | **Experience** | **Projects** |
 | ![Experience timeline](docs/screenshots/experience.png) | ![Projects section](docs/screenshots/projects.png) |
 | **Playground** | **Contact** |
-| ![Playground with the fallback-waterfall demo](docs/screenshots/playground.png) | ![Contact section with 3D planet](docs/screenshots/contact.png) |
+| ![Playground with the fallback-waterfall demo](docs/screenshots/playground.png) | ![Contact section with animated envelope](docs/screenshots/contact.png) |
 
 <details>
 <summary>Mobile</summary>
@@ -35,7 +35,8 @@ A personal portfolio built with Next.js 16, React 19 and Three.js. It has intera
 
 ## Features
 
-- **3D scenes.** The hero has a desktop PC model, the Skills section has a field of tech-logo balls that react to hover, and Contact has a stylized planet. All are built with React Three Fiber and drei.
+- **3D scenes.** The hero has a desktop PC model and the Skills section has a field of tech-logo balls that react to hover, both built with React Three Fiber and drei.
+- **Animated contact visual.** An SVG paper plane flies into an envelope that opens to a "Let's connect" card, animated with Framer Motion.
 - **Live GitHub repos.** The Playground lists selected repositories with language and last-push date, fetched from the GitHub API on the server and refreshed hourly.
 - **Interactive demo.** The "fallback waterfall" lets visitors switch data providers off and watch a request fall through to the next one. It's the same pattern used in Nexus AI v2.
 - **Contact form and guestbook.** Messages are stored in Postgres through Prisma and, optionally, emailed to me through Resend. Guestbook notes only appear on the site after I approve them. Both forms are validated with Zod and limited to one submission per minute per visitor (IP addresses are stored hashed).
@@ -117,7 +118,7 @@ src/
 ├── app/              # Routes, layout, OG image, sitemap, robots
 │   └── freelance/    # /freelance page
 ├── components/
-│   ├── 3d/           # Three.js scenes (desktop PC, tech balls, planet)
+│   ├── 3d/           # Three.js scenes (desktop PC, tech balls)
 │   ├── hero/ about/ skills/ experience/ projects/
 │   ├── playground/   # Fallback-waterfall demo and GitHub repos
 │   ├── contact/      # Contact form and guestbook
