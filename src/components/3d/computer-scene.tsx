@@ -19,13 +19,14 @@ function Computer() {
 
 useGLTF.preload("/desktop_pc/scene.glb");
 
-export function ComputerScene() {
+export function ComputerScene({ interactive }: { interactive: boolean }) {
   return (
     <Canvas
       frameloop="demand"
       shadows
       dpr={[1, 1.5]}
-      camera={{ position: [20, 3, 5], fov: 20 }}
+      // Already at the polar angle OrbitControls clamps to, so the view matches with or without controls.
+      camera={{ position: [20.2, 0, 5.05], fov: 20 }}
       gl={{ antialias: true, powerPreference: "high-performance" }}
       style={{ touchAction: "pan-y" }}
     >
@@ -34,12 +35,14 @@ export function ComputerScene() {
       <pointLight position={[10, 10, 10]} intensity={1.2} />
       <Suspense fallback={null}>
         <Computer />
-        <OrbitControls
-          enablePan={false}
-          enableZoom={false}
-          maxPolarAngle={Math.PI / 2}
-          minPolarAngle={Math.PI / 2}
-        />
+        {interactive && (
+          <OrbitControls
+            enablePan={false}
+            enableZoom={false}
+            maxPolarAngle={Math.PI / 2}
+            minPolarAngle={Math.PI / 2}
+          />
+        )}
       </Suspense>
       <Preload all />
     </Canvas>

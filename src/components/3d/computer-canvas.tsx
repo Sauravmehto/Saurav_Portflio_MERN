@@ -6,7 +6,7 @@ import { SceneErrorBoundary } from "./scene-error-boundary";
 
 const ComputerScene = dynamic(
   () => import("./computer-scene").then((mod) => mod.ComputerScene),
-  { ssr: false }
+  { ssr: false, loading: () => <HeroModelFallback /> }
 );
 
 export function HeroModelFallback() {
@@ -26,16 +26,14 @@ export function HeroModelFallback() {
   );
 }
 
-/** Desktop-only. The scene chunk (three.js) is not rendered below 768px. */
 export function ComputerCanvas() {
-  const desktop = useMediaQuery("(min-width: 768px)");
-
-  if (!desktop) return <HeroModelFallback />;
+  // Drag-to-rotate captures touches (OrbitControls sets touch-action: none), which would block page scrolling on phones.
+  const finePointer = useMediaQuery("(pointer: fine)");
 
   return (
     <SceneErrorBoundary fallback={<HeroModelFallback />}>
       <div className="h-full w-full">
-        <ComputerScene />
+        <ComputerScene interactive={finePointer} />
       </div>
     </SceneErrorBoundary>
   );
