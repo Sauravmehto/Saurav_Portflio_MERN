@@ -49,6 +49,7 @@ export function FreelanceSection() {
               stack={project.stack}
               liveUrl={project.liveUrl}
               repoUrl={project.repoUrl}
+              image={"image" in project ? project.image : undefined}
               index={i}
             />
           ))}

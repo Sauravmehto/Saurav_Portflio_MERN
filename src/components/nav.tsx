@@ -64,7 +64,6 @@ export function Nav() {
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
         <Link
           href={resolveNavHref("#hero", pathname)}
-          data-cursor="hover"
           className="shrink-0 whitespace-nowrap font-mono text-[13px] font-semibold tracking-tight sm:text-sm"
         >
           {siteConfig.name.toUpperCase()}
@@ -78,7 +77,6 @@ export function Nav() {
               <li key={link.href}>
                 <Link
                   href={resolveNavHref(link.href, pathname)}
-                  data-cursor="hover"
                   aria-current={active ? "page" : undefined}
                   className={`group relative text-sm transition hover:text-foreground ${
                     active ? "text-foreground" : "text-muted-foreground"
@@ -100,7 +98,6 @@ export function Nav() {
           <ThemeToggle />
           <button
             type="button"
-            data-cursor="hover"
             onClick={() => setMenuOpen((open) => !open)}
             aria-expanded={menuOpen}
             aria-controls="mobile-nav"

@@ -65,7 +65,6 @@ export function CommandPalette() {
     <>
       <button
         type="button"
-        data-cursor="hover"
         onClick={() => setOpen(true)}
         className="fixed bottom-6 right-6 z-50 hidden items-center gap-2 rounded-full border border-border bg-surface/80 px-4 py-2 text-sm text-muted-foreground shadow-lg backdrop-blur transition hover:border-accent hover:text-foreground sm:flex"
       >

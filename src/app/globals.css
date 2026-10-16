@@ -114,14 +114,6 @@ body {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-/* Hide native cursor for pointer devices when custom cursor is active */
-@media (hover: hover) and (pointer: fine) {
-  html.custom-cursor-active,
-  html.custom-cursor-active * {
-    cursor: none !important;
-  }
-}
-
 /* Subtle grain/noise overlay, "designed by a human" feel */
 .grain-overlay {
   pointer-events: none;

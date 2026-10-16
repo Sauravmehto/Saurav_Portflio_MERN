@@ -54,7 +54,6 @@ export function Footer() {
           <div>
             <Link
               href={resolveNavHref("#hero", pathname)}
-              data-cursor="hover"
               className="font-mono text-sm font-semibold tracking-tight"
             >
               {siteConfig.name.toUpperCase()}
@@ -66,7 +65,6 @@ export function Footer() {
               href={siteConfig.resumeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor="hover"
               className="mt-5 inline-flex rounded-full border border-border px-5 py-2 text-sm font-medium transition hover:border-accent hover:text-accent"
             >
               Download resume ↓
@@ -80,7 +78,7 @@ export function Footer() {
             <ul className="mt-4 grid grid-cols-2 gap-x-6 gap-y-2.5">
               {navLinks.map((link) => (
                 <li key={link.href}>
-                  <Link href={resolveNavHref(link.href, pathname)} data-cursor="hover" className={linkClass}>
+                  <Link href={resolveNavHref(link.href, pathname)} className={linkClass}>
                     {link.label}
                     <span className={underline} />
                   </Link>
@@ -98,7 +96,6 @@ export function Footer() {
                 <li key={s.label}>
                   <a
                     href={s.href}
-                    data-cursor="hover"
                     className={`${linkClass} inline-flex items-center gap-2`}
                     {...(s.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                   >
@@ -132,7 +129,6 @@ export function Footer() {
             </span>
             <button
               type="button"
-              data-cursor="hover"
               onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
               className="transition hover:text-accent"
             >

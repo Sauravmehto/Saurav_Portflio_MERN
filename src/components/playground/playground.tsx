@@ -20,7 +20,6 @@ function RepoCard({ repo, index }: { repo: GithubRepo; index: number }) {
       href={repo.url}
       target="_blank"
       rel="noopener noreferrer"
-      data-cursor="hover"
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, amount: 0.4 }}
@@ -85,7 +84,6 @@ export function Playground({ repos }: { repos: GithubRepo[] }) {
               href={siteConfig.socials.github}
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor="hover"
               className="group/link mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent"
             >
               {repos.length > 0 ? "All repos on GitHub" : "See my work on GitHub"}

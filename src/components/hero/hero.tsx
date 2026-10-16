@@ -6,7 +6,6 @@ import { Magnetic } from "@/components/motion/magnetic";
 import { Reveal } from "@/components/motion/reveal";
 import { ComputerCanvas } from "@/components/3d/computer-canvas";
 import { siteConfig } from "@/lib/site-config";
-import { ScrollCue } from "./scroll-cue";
 import { StatusBadge } from "./status-badge";
 
 const typeSequence = siteConfig.roles.flatMap((line) => [line, 1800]);
@@ -19,7 +18,7 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_top,rgba(145,94,255,0.16),transparent_58%)]"
       />
 
-      <div className="mx-auto grid w-full max-w-[90rem] flex-1 grid-cols-1 items-center gap-6 px-6 pb-24 pt-28 md:grid-cols-[minmax(17rem,1fr)_minmax(0,1.15fr)] md:gap-4 lg:gap-8 xl:grid-cols-[minmax(17rem,1fr)_760px]">
+      <div className="mx-auto grid w-full max-w-[90rem] flex-1 grid-cols-1 items-center gap-6 px-6 pb-24 pt-28 md:gap-4 lg:gap-8 lg:pointer-fine:grid-cols-[minmax(17rem,1fr)_minmax(0,1.15fr)] xl:pointer-fine:grid-cols-[minmax(17rem,1fr)_760px]">
         <div className="flex gap-5">
           <div aria-hidden className="mt-3 flex flex-col items-center">
             <span className="h-5 w-5 rounded-full bg-accent" />
@@ -80,7 +79,6 @@ export function Hero() {
               <Magnetic>
                 <a
                   href="#projects"
-                  data-cursor="hover"
                   className="inline-flex rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition hover:opacity-90"
                 >
                   View Work
@@ -91,7 +89,6 @@ export function Hero() {
                   href={siteConfig.resumeUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-cursor="hover"
                   className="inline-flex rounded-full border border-border px-6 py-3 text-sm font-medium transition hover:border-accent hover:text-accent"
                 >
                   Download Resume
@@ -101,12 +98,10 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative aspect-[760/500] w-full max-w-[760px] justify-self-end overflow-hidden xl:aspect-auto xl:h-[500px] xl:w-[760px]">
+        <div className="relative hidden aspect-[760/500] w-full lg:pointer-fine:block max-w-[760px] justify-self-end overflow-hidden xl:aspect-auto xl:h-[500px] xl:w-[760px]">
           <ComputerCanvas />
         </div>
       </div>
-
-      <ScrollCue />
     </section>
   );
 }

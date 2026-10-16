@@ -26,14 +26,16 @@ export function HeroModelFallback() {
   );
 }
 
+/** Desktops only; must match the hero container's `lg:pointer-fine:block` so phones and tablets never download the model. */
 export function ComputerCanvas() {
-  // Drag-to-rotate captures touches (OrbitControls sets touch-action: none), which would block page scrolling on phones.
-  const finePointer = useMediaQuery("(pointer: fine)");
+  const desktop = useMediaQuery("(min-width: 1024px) and (pointer: fine)");
+
+  if (!desktop) return null;
 
   return (
     <SceneErrorBoundary fallback={<HeroModelFallback />}>
       <div className="h-full w-full">
-        <ComputerScene interactive={finePointer} />
+        <ComputerScene />
       </div>
     </SceneErrorBoundary>
   );

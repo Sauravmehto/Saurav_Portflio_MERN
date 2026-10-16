@@ -162,7 +162,6 @@ export function FallbackWaterfall() {
                   aria-label={`${name} is ${up[i] ? "up" : "down"}`}
                   disabled={running}
                   onClick={() => toggle(i)}
-                  data-cursor="hover"
                   className={`relative h-5 w-9 shrink-0 rounded-full border transition-colors disabled:opacity-50 ${
                     up[i] ? "border-accent bg-accent" : "border-border bg-surface-muted"
                   }`}
@@ -200,7 +199,6 @@ export function FallbackWaterfall() {
           type="button"
           onClick={run}
           disabled={running}
-          data-cursor="hover"
           className="rounded-full bg-accent px-5 py-2 text-sm font-medium text-accent-foreground transition hover:opacity-90 disabled:opacity-60"
         >
           {running ? "Running…" : "Send request"}

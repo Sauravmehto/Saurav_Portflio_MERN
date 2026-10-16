@@ -62,7 +62,6 @@ export function SkillCategoryCard({
 
   const card = (
     <div
-      data-cursor="hover"
       className="group h-full rounded-2xl border border-border bg-surface/60 p-6 backdrop-blur transition hover:-translate-y-0.5 hover:border-accent hover:shadow-[0_0_32px_-10px_var(--color-accent)] motion-reduce:hover:translate-y-0"
     >
       <h3 className="flex items-center gap-2 font-mono text-sm uppercase tracking-wide text-accent">

@@ -4,7 +4,6 @@ import "lenis/dist/lenis.css";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { SmoothScrollProvider } from "@/components/smooth-scroll-provider";
-import { CustomCursor } from "@/components/custom-cursor";
 import { CommandPalette } from "@/components/command-palette";
 import { ScrollProgress } from "@/components/motion/scroll-progress";
 import { siteConfig } from "@/lib/site-config";
@@ -82,7 +81,6 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <SmoothScrollProvider>
             <ScrollProgress />
             <div aria-hidden className="grain-overlay" />
-            <CustomCursor />
             {children}
             <CommandPalette />
           </SmoothScrollProvider>

@@ -122,7 +122,6 @@ export function Contact() {
             <Magnetic>
               <a
                 href={`mailto:${siteConfig.email}`}
-                data-cursor="hover"
                 className="inline-flex items-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-medium text-accent-foreground transition hover:opacity-90"
               >
                 <Mail aria-hidden className="h-4 w-4" />
@@ -132,7 +131,6 @@ export function Contact() {
             <button
               type="button"
               onClick={copyEmail}
-              data-cursor="hover"
               className="min-w-[8.5rem] rounded-full border border-border px-6 py-3 text-sm font-medium transition hover:border-accent hover:text-accent"
             >
               {copyState === "copied" ? "Copied ✓" : copyState === "failed" ? "Copy failed" : "Copy email"}
@@ -142,7 +140,6 @@ export function Contact() {
                 href={siteConfig.bookingUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                data-cursor="hover"
                 className="rounded-full border border-border px-6 py-3 text-sm font-medium transition hover:border-accent hover:text-accent"
               >
                 Book a call ↗
@@ -160,7 +157,6 @@ export function Contact() {
                   href={s.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  data-cursor="hover"
                   aria-label={s.label}
                   className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border text-muted-foreground transition hover:-translate-y-0.5 hover:border-accent hover:text-foreground motion-reduce:hover:translate-y-0"
                 >

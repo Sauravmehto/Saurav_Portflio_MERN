@@ -19,7 +19,7 @@ function Computer() {
 
 useGLTF.preload("/desktop_pc/scene.glb");
 
-export function ComputerScene({ interactive }: { interactive: boolean }) {
+export function ComputerScene() {
   return (
     <Canvas
       frameloop="demand"
@@ -35,14 +35,12 @@ export function ComputerScene({ interactive }: { interactive: boolean }) {
       <pointLight position={[10, 10, 10]} intensity={1.2} />
       <Suspense fallback={null}>
         <Computer />
-        {interactive && (
-          <OrbitControls
-            enablePan={false}
-            enableZoom={false}
-            maxPolarAngle={Math.PI / 2}
-            minPolarAngle={Math.PI / 2}
-          />
-        )}
+        <OrbitControls
+          enablePan={false}
+          enableZoom={false}
+          maxPolarAngle={Math.PI / 2}
+          minPolarAngle={Math.PI / 2}
+        />
       </Suspense>
       <Preload all />
     </Canvas>

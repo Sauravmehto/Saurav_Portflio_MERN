@@ -52,7 +52,6 @@ export function Guestbook({ available, notes }: { available: boolean; notes: Pub
               <button
                 type="submit"
                 disabled={pending}
-                data-cursor="hover"
                 className="rounded-full border border-border px-5 py-2 text-sm font-medium transition hover:border-accent hover:text-accent disabled:opacity-60"
               >
                 {pending ? "Sending…" : "Leave a note"}

@@ -34,6 +34,8 @@ export type Project = {
   // Optional real media in /public. Rendered only when set — never a mockup.
   image?: string;
   video?: string;
+  /** "How it works" steps; when set, the card flips to show them on its back. */
+  flow?: { step: string; detail: string }[];
   featured: boolean;
 };
 
@@ -46,6 +48,8 @@ export type FreelanceProject = {
   stack: string[];
   liveUrl: string;
   repoUrl?: string;
+  /** Homepage screenshot, cropped to 2.05:1 (1280×624). */
+  image?: string;
 };
 
 export type Testimonial = {
@@ -243,43 +247,135 @@ export const siteConfig = {
   // ---------- Projects ----------
   projects: [
     {
-      title: "Nexus AI v2",
-      tagline: "Agentic Portfolio Rebalancing Platform",
+      title: "Private Credit AI Agent",
+      tagline: "Private Credit Intelligence Platform",
       description:
-        "An 11-node LangGraph state machine that ingests portfolio CSVs, pulls live prices and 7/30-day trends from Yahoo Finance, aggregates sector news via a 3-tier source fallback (Event Registry → Finnhub → mock), and uses Claude for 5-level sentiment classification. Fuses return, sentiment, trend, allocation, and risk into a weighted 0–100 composite driving a 7-action recommendation engine (Strong Buy → Strong Sell). Shipped across CLI, FastAPI, and a React dashboard.",
-      stack: ["LangGraph", "FastAPI", "React/Vite", "Claude", "yfinance"],
-      liveUrl: undefined, // TODO(saurav)
-      repoUrl: undefined, // TODO(saurav)
+        "Portfolio analytics for venture debt and private credit. Upload a deal tape and Python calculates every deal's IRR, MOIC, amortization schedule and restructure scenarios. A LangGraph agent with 21 finance tools explains the results in plain English, calling the tools instead of inventing the figures.",
+      stack: ["React", "FastAPI", "LangGraph", "Claude API", "MongoDB"],
+      liveUrl: "https://privatecreditnexusai.netlify.app/",
+      repoUrl: "https://github.com/Sauravmehto/Private_Credit_Nexus_AI_AGENT",
+      image: "/projects/private-credit-ai-agent.webp",
+      flow: [
+        {
+          step: "Upload a deal tape",
+          detail: "Drop in an Excel, CSV or JSON file, load one from a URL, or pick one of five sample portfolios with fictional companies.",
+        },
+        {
+          step: "Normalize the deals",
+          detail: "The backend finds the right sheet and header row, matches column aliases like \"Coupon\" or \"Tenor\", and names any missing columns.",
+        },
+        {
+          step: "Calculate in Python",
+          detail: "Monthly cash flows give each deal's IRR, MOIC, a basis-point breakdown of coupon, fees and PIK, and a dated payment schedule.",
+        },
+        {
+          step: "Stress-test",
+          detail: "Eight preset restructure scenarios plus a custom one reprice the deal and chart every IRR against the base case.",
+        },
+        {
+          step: "Ask the AI analyst",
+          detail: "A LangGraph agent picks from 21 finance tools and writes up the answer. Every tool call shows its inputs, output and time, with Claude falling back to OpenAI, Gemini or Groq.",
+        },
+      ],
       featured: true,
     },
     {
-      title: "Local Stock Analyst",
-      tagline: "Financial-Data MCP Server",
+      title: "Stockportflio AI Agent",
+      tagline: "Stock Research & Portfolio Intelligence",
       description:
-        "A Model Context Protocol server exposing 50+ financial-analysis tools across 9 domains (market, stocks, technical, fundamental, options, risk, news, screener, portfolio), backed by 10 fallback-routed data providers including Finnhub, Alpha Vantage, FMP, and SEC EDGAR. Added in-memory TTL caching, per-provider rate-limit guards, and dual stdio/HTTP transport for Render deployment.",
-      stack: ["Python", "MCP", "10 data providers"],
-      liveUrl: undefined, // TODO(saurav)
-      repoUrl: undefined, // TODO(saurav)
+        "Stock research and portfolio rebalancing where every figure carries its source and timestamp. An 11-node LangGraph agent scores each holding on returns, trend, sector allocation and news sentiment, then recommends Buy, Hold or Sell with reasons. Claude interprets only the evidence retrieved, and never supplies prices or news itself.",
+      stack: ["LangGraph", "FastAPI", "React", "Claude API", "Finnhub"],
+      liveUrl: "https://stocksportflioaiagent.netlify.app/",
+      repoUrl: "https://github.com/Sauravmehto/Stockportflio-AI",
+      image: "/projects/stockportflio-ai.webp",
+      flow: [
+        {
+          step: "Load a portfolio or ticker",
+          detail: "Upload holdings as a CSV for rebalancing, or look up a single ticker for stock analysis.",
+        },
+        {
+          step: "Gather market data",
+          detail: "Quotes and fundamentals come from Finnhub, with Yahoo Finance as the fallback and the source of price history. Every quote is labelled with its source and time.",
+        },
+        {
+          step: "Collect the news",
+          detail: "Headlines are pulled from Event Registry, then Finnhub, then NewsData.io until enough stories are found, and de-duplicated. If none return, the report says so.",
+        },
+        {
+          step: "Score each holding",
+          detail: "The 11-step LangGraph agent analyses trends, classifies sentiment and checks sector allocation against targets.",
+        },
+        {
+          step: "Recommend and explain",
+          detail: "It recommends Buy, Hold or Sell per holding, and Claude explains why using only the retrieved data. Results export as a report or CSV.",
+        },
+      ],
       featured: true,
     },
     {
-      title: "GTM Intelligence Platform",
-      tagline: "Scraping & Enrichment Pipeline",
+      title: "LeadPipe",
+      tagline: "Lead Intelligence Pipeline",
       description:
-        "Automated a marketing team's lead research with a 3-tier scraper (httpx + BeautifulSoup → deep-link scan → headless Playwright) and a 6-source fallback waterfall (Bing, Brave, DuckDuckGo, team-page, Tavily, Apollo) for company LinkedIn/website resolution. Scores and ranks decision-maker profiles, enriches verified work email and direct dial via Apollo, and syncs qualified contacts into HubSpot CRM.",
-      stack: ["Python", "Playwright", "Apollo API", "HubSpot"],
-      liveUrl: undefined, // TODO(saurav)
-      repoUrl: undefined, // TODO(saurav)
+        "Turns a spreadsheet of companies into a ranked, contact-enriched list of decision makers. A 3-tier scraper plus a 6-source fallback waterfall resolves each company's LinkedIn page, then a second waterfall finds and scores senior people, enriches verified work email and direct dial via Apollo, and exports a HubSpot-ready report.",
+      stack: ["Python", "FastAPI", "React", "Playwright", "Apollo API"],
+      liveUrl: "https://leadpipe.onrender.com/",
+      repoUrl: "https://github.com/Sauravmehto/leadpipe",
+      image: "/projects/leadpipe.webp",
+      flow: [
+        {
+          step: "Upload a company list",
+          detail: "Drop in an .xlsx with an Official Website column, up to 500 companies per job.",
+        },
+        {
+          step: "Find each company's LinkedIn page",
+          detail: "3 scraping tiers (HTML parse → deep links → headless Playwright) plus a fallback waterfall of team pages, Tavily and Apollo resolve and score every candidate URL.",
+        },
+        {
+          step: "Find decision makers",
+          detail: "Team pages, Serper, Apollo and Tavily searches run only as needed, then every profile is scored 0–100 on role, seniority and company match.",
+        },
+        {
+          step: "Enrich contacts",
+          detail: "Apollo adds verified work email, direct dial and HQ phone to the top-ranked profiles per company.",
+        },
+        {
+          step: "Review and export",
+          detail: "Watch progress live, edit results in the browser, then export a HubSpot-import-ready Excel report or sync straight to HubSpot CRM.",
+        },
+      ],
       featured: true,
     },
     {
-      title: "AI-Powered Snowflake Dashboard Generator",
-      tagline: "Natural-language analytics over Snowflake",
+      title: "DA One",
+      tagline: "Natural-Language BI Platform",
       description:
-        "Users describe a chart in plain English, Claude generates the SQL, and the app validates it, auto-corrects on failure, and renders interactive charts. Includes a data-assistant chatbot, MFA-secured auth, SQL-injection guardrails, TOML-driven per-database semantic layers, and a production Docker deployment on Portainer.",
-      stack: ["Streamlit", "Claude", "Snowflake", "Docker"],
-      liveUrl: undefined, // TODO(saurav)
-      repoUrl: undefined, // TODO(saurav)
+        "Ask questions of a Snowflake warehouse or uploaded spreadsheets and documents in plain English. A streaming Claude agent chooses its own tools — read-only SQL validated before it runs, document search, charting — to answer, build and save dashboards, and generate Excel reports from a template. Signs in with Snowflake OAuth and keeps a versioned semantic layer and audit trail.",
+      stack: ["React", "FastAPI", "Claude API", "Snowflake", "DuckDB"],
+      liveUrl: "https://one-dev.dataalpha.in/login",
+      repoUrl: "https://github.com/Sauravmehto/Da_One_AI_Report_Snowflake",
+      image: "/projects/da-one.webp",
+      flow: [
+        {
+          step: "Sign in",
+          detail: "Snowflake OAuth, or email and password in development, provisioned by an administrator.",
+        },
+        {
+          step: "Pick a source",
+          detail: "Choose a Snowflake database the signed-in role can see, or upload spreadsheets, PDFs and Word docs to chat against instead.",
+        },
+        {
+          step: "Ask in chat",
+          detail: "A streaming Claude agent picks its own tools: validated read-only SQL, document search, or a chart.",
+        },
+        {
+          step: "Plan and save",
+          detail: "Dashboard plans are validated and cached, then saved as a versioned row in Snowflake when they look right.",
+        },
+        {
+          step: "Export",
+          detail: "Open a saved dashboard, export it to PDF, or run an Excel template report bound to live SQL.",
+        },
+      ],
       featured: true,
     },
     // Secondary/employer-context projects — real, well-scoped work from
@@ -341,6 +437,7 @@ export const siteConfig = {
       stack: ["TypeScript"],
       liveUrl: "https://tripime.netlify.app/",
       repoUrl: "https://github.com/Sauravmehto/Tripime",
+      image: "/freelance/tripime.webp",
     },
     {
       title: "The Nuzz Story",
@@ -348,6 +445,7 @@ export const siteConfig = {
       stack: ["TypeScript"],
       liveUrl: "https://thenuzzstory.netlify.app/",
       repoUrl: "https://github.com/Sauravmehto/TheNuzzStory",
+      image: "/freelance/thenuzzstory.webp",
     },
     {
       title: "Batterwala",
@@ -356,6 +454,7 @@ export const siteConfig = {
         "A D2C landing page for a homemade idli & dosa batter brand — hero section with product highlights, trust badges (Fresh Daily, No Preservatives, Natural, Premium), a product showcase card, and customer ratings, built to drive online orders.",
       stack: ["TODO(saurav) — confirm actual stack used"],
       liveUrl: "https://batterwalain.netlify.app/",
+      image: "/freelance/batterwala.webp",
       // no repoUrl: no public repo on GitHub as of Sep 2026
     },
   ] satisfies FreelanceProject[],

@@ -6,7 +6,6 @@ import type { Experience } from "@/lib/site-config";
 const externalLinkProps = {
   target: "_blank",
   rel: "noopener noreferrer",
-  "data-cursor": "hover",
 } as const;
 
 const linkClass =
@@ -84,7 +83,6 @@ export function TimelineItem({
         {item.linkedSection && (
           <a
             href={item.linkedSection.href}
-            data-cursor="hover"
             className="group/link mt-5 inline-flex items-center gap-1.5 text-sm font-medium text-accent"
           >
             {item.linkedSection.label}
