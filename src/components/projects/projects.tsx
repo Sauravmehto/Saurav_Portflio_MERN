@@ -33,6 +33,7 @@ export function Projects() {
               image={project.image}
               video={project.video}
               flow={project.flow}
+              mcpUrl={project.mcpUrl}
               index={i}
               // odd count: lead project spans the full row so the grid has no gap
               className={i === 0 && featured.length % 2 === 1 ? "md:col-span-2" : ""}

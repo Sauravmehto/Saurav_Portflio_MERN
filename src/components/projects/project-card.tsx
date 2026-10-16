@@ -69,6 +69,45 @@ function LockIcon() {
   );
 }
 
+function McpEndpoint({ url }: { url: string }) {
+  const [state, setState] = useState<"idle" | "copied" | "failed">("idle");
+
+  async function copy() {
+    try {
+      await navigator.clipboard.writeText(url);
+      setState("copied");
+    } catch {
+      setState("failed");
+    }
+    setTimeout(() => setState("idle"), 2000);
+  }
+
+  return (
+    <div className="mt-5 rounded-xl border border-border bg-surface-muted/60 px-3 py-2.5">
+      <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-0.5">
+        <p className="shrink-0 whitespace-nowrap font-mono text-[10px] uppercase tracking-wide text-accent">MCP server</p>
+        <p className="text-[11px] text-muted-foreground">Connect from Claude or any MCP client</p>
+      </div>
+      <div className="mt-1.5 flex items-center gap-2">
+        <code className="min-w-0 flex-1 truncate font-mono text-xs text-foreground" title={url}>
+          {url}
+        </code>
+        <button
+          type="button"
+          onClick={copy}
+          aria-label="Copy MCP server URL"
+          className="shrink-0 rounded-md border border-border px-2.5 py-1 text-xs font-medium text-muted-foreground transition hover:border-accent hover:text-accent"
+        >
+          {state === "copied" ? "Copied ✓" : state === "failed" ? "Copy failed" : "Copy"}
+        </button>
+      </div>
+      <span aria-live="polite" className="sr-only">
+        {state === "copied" ? "MCP server URL copied" : state === "failed" ? "Could not copy the URL" : ""}
+      </span>
+    </div>
+  );
+}
+
 /** Screenshot shown inside a themed browser window that rises out of the card's top edge. */
 function BrowserPreview({ image, title, liveUrl }: { image: string; title: string; liveUrl?: string }) {
   const address = liveUrl ? new URL(liveUrl).hostname : title;
@@ -154,6 +193,8 @@ export type ProjectCardProps = {
   video?: string;
   /** When set, a "How it works" button flips the card to show these steps. */
   flow?: readonly { step: string; detail: string }[];
+  /** MCP endpoint for MCP clients; shown with a copy button rather than as a link. */
+  mcpUrl?: string;
   index: number;
   /** Grid placement for the wrapper, e.g. "md:col-span-2". */
   className?: string;
@@ -175,6 +216,7 @@ export function ProjectCard({
   image,
   video,
   flow,
+  mcpUrl,
   index,
   className = "",
 }: ProjectCardProps) {
@@ -290,6 +332,8 @@ export function ProjectCard({
           ))}
         </ul>
       )}
+
+      {mcpUrl && <McpEndpoint url={mcpUrl} />}
 
       {(liveUrl || repoUrl || flow) && (
         <div className="mt-auto flex flex-wrap gap-3 pt-6">

@@ -36,6 +36,8 @@ export type Project = {
   video?: string;
   /** "How it works" steps; when set, the card flips to show them on its back. */
   flow?: { step: string; detail: string }[];
+  /** Public MCP endpoint, shown with a copy button for MCP clients. */
+  mcpUrl?: string;
   featured: boolean;
 };
 
@@ -254,6 +256,8 @@ export const siteConfig = {
       stack: ["React", "FastAPI", "LangGraph", "Claude API", "MongoDB"],
       liveUrl: "https://privatecreditnexusai.netlify.app/",
       repoUrl: "https://github.com/Sauravmehto/Private_Credit_Nexus_AI_AGENT",
+      // TODO(saurav): returns 404 as of Oct 2026 (Render reports no service at this host)
+      mcpUrl: "https://privatecreaditaiagentnexus.onrender.com/mcp",
       image: "/projects/private-credit-ai-agent.webp",
       flow: [
         {
