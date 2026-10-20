@@ -33,10 +33,9 @@ export function AnimatedAvatar() {
       <div className="relative flex h-full w-full items-center justify-center overflow-hidden rounded-full border border-border bg-surface/80 backdrop-blur">
         {siteConfig.avatarUrl ? (
           <Image
-            src={reducedMotion && siteConfig.avatarPosterUrl ? siteConfig.avatarPosterUrl : siteConfig.avatarUrl}
+            src={siteConfig.avatarUrl}
             alt={siteConfig.name}
             fill
-            unoptimized
             sizes="(min-width: 1024px) 320px, (min-width: 640px) 256px, 208px"
             className="object-cover object-top"
           />
