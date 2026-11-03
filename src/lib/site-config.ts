@@ -48,7 +48,9 @@ export type FreelanceProject = {
   tagline?: string;
   blurb: string;
   stack: string[];
-  liveUrl: string;
+  // Omit while not deployed and set comingSoon instead.
+  liveUrl?: string;
+  comingSoon?: boolean;
   repoUrl?: string;
   /** Homepage screenshot, cropped to 2.05:1 (1280×624). */
   image?: string;
@@ -95,7 +97,7 @@ export const siteConfig = {
     "Outside of client and product work, I like digging into agent architectures (LangGraph, MCP) and building small tools that automate the tedious parts of my own workflow — a few of which live in the Playground section below.",
   ],
 
-  resumeUrl: "/Saurav_Mehto_Resume.pdf",
+  resumeUrl: "/SauravMehto_Resume.pdf",
 
   // ---------- Skills ----------
   skillCategories: [
@@ -354,7 +356,7 @@ export const siteConfig = {
       description:
         "Ask questions of a Snowflake warehouse or uploaded spreadsheets and documents in plain English. A streaming Claude agent chooses its own tools — read-only SQL validated before it runs, document search, charting — to answer, build and save dashboards, and generate Excel reports from a template. Signs in with Snowflake OAuth and keeps a versioned semantic layer and audit trail.",
       stack: ["React", "FastAPI", "Claude API", "Snowflake", "DuckDB"],
-      liveUrl: "https://one-dev.dataalpha.in/login",
+      liveUrl: "https://dataalphaone.netlify.app/",
       repoUrl: "https://github.com/Sauravmehto/Da_One_AI_Report_Snowflake",
       image: "/projects/da-one.webp",
       flow: [
@@ -436,18 +438,22 @@ export const siteConfig = {
   freelanceProjects: [
     {
       title: "Tripime",
-      blurb: "TODO(saurav): one or two lines on what Tripime does and who it was built for.",
-      stack: ["TypeScript"],
+      tagline: "Travel booking & holiday packages",
+      blurb:
+        "A travel site for a Delhi-based agency — domestic flight search from Delhi, curated holiday packages, an offers zone, and a WhatsApp line to a real travel expert. Next.js frontend on Netlify and a FastAPI backend on Render, with separate JWT logins for customers and admins and startup checks that refuse weak secrets.",
+      stack: ["Next.js", "TypeScript", "FastAPI", "Python", "JWT auth", "Netlify", "Render"],
       liveUrl: "https://tripime.netlify.app/",
-      repoUrl: "https://github.com/Sauravmehto/Tripime",
-      image: "/freelance/tripime.webp",
+      repoUrl: "https://github.com/Sauravmehto/Tripime-NewUII",
+      image: "/TRIPMEIMAGE.png",
     },
     {
       title: "The Nuzz Story",
-      blurb: "TODO(saurav): one or two lines on what The Nuzz Story is and who it was built for.",
-      stack: ["TypeScript"],
+      tagline: "Pet store — shop & storefront",
+      blurb:
+        "An online shop for a pet store in Chittaranjan Park, New Delhi, selling food, toys, beds, walking gear and grooming products for dogs and cats. The cart updates instantly while the server re-prices against the live catalog, orders are idempotent and saved before WhatsApp checkout opens, with GSAP scroll animations and accessible dialogs.",
+      stack: ["Next.js", "React", "TypeScript", "GSAP", "Netlify Blobs", "Playwright"],
       liveUrl: "https://thenuzzstory.netlify.app/",
-      repoUrl: "https://github.com/Sauravmehto/TheNuzzStory",
+      repoUrl: "https://github.com/Sauravmehto/Thenuzzstory_NewUI",
       image: "/freelance/thenuzzstory.webp",
     },
     {
@@ -459,6 +465,24 @@ export const siteConfig = {
       liveUrl: "https://batterwalain.netlify.app/",
       image: "/freelance/batterwala.webp",
       // no repoUrl: no public repo on GitHub as of Sep 2026
+    },
+    {
+      title: "Shades of Soy",
+      tagline: "Organic candle shop",
+      blurb:
+        "An e-commerce store for an organic soy candle brand — product catalog, cart and checkout for hand-poured candles. Built and working; deployment coming soon.",
+      // TODO(saurav): fill in the actual stack, and add liveUrl/repoUrl (and drop comingSoon) once deployed
+      stack: [],
+      comingSoon: true,
+    },
+    {
+      title: "EduMind AI",
+      tagline: "Every Student. Every Insight. Better Learning.",
+      blurb:
+        "AI-Powered Student Performance & Academic Intelligence Agent — an AI agent that analyses student performance data and turns it into insights for better learning. Built and working; deployment coming soon.",
+      // TODO(saurav): fill in the actual stack, and add liveUrl/repoUrl (and drop comingSoon) once deployed
+      stack: [],
+      comingSoon: true,
     },
   ] satisfies FreelanceProject[],
 

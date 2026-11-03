@@ -47,8 +47,9 @@ export function FreelanceSection() {
               tagline={"tagline" in project ? project.tagline : undefined}
               description={project.blurb}
               stack={project.stack}
-              liveUrl={project.liveUrl}
-              repoUrl={project.repoUrl}
+              liveUrl={"liveUrl" in project ? project.liveUrl : undefined}
+              comingSoon={"comingSoon" in project ? project.comingSoon : undefined}
+              repoUrl={"repoUrl" in project ? project.repoUrl : undefined}
               image={"image" in project ? project.image : undefined}
               index={i}
             />

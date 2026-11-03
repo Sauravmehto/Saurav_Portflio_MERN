@@ -195,6 +195,8 @@ export type ProjectCardProps = {
   flow?: readonly { step: string; detail: string }[];
   /** MCP endpoint for MCP clients; shown with a copy button rather than as a link. */
   mcpUrl?: string;
+  /** Not deployed yet: shows a static "Coming soon" pill in place of the live link. */
+  comingSoon?: boolean;
   index: number;
   /** Grid placement for the wrapper, e.g. "md:col-span-2". */
   className?: string;
@@ -217,6 +219,7 @@ export function ProjectCard({
   video,
   flow,
   mcpUrl,
+  comingSoon = false,
   index,
   className = "",
 }: ProjectCardProps) {
@@ -239,6 +242,12 @@ export function ProjectCard({
 
   const linkButtons = (
     <>
+      {comingSoon && !liveUrl && (
+        <span className="inline-flex items-center gap-2 rounded-full border border-dashed border-accent/50 px-5 py-2 text-sm font-medium text-accent">
+          <span aria-hidden className="h-1.5 w-1.5 rounded-full bg-accent/60" />
+          Coming soon · deploying
+        </span>
+      )}
       {liveUrl && (
         <a
           href={liveUrl}
@@ -335,7 +344,7 @@ export function ProjectCard({
 
       {mcpUrl && <McpEndpoint url={mcpUrl} />}
 
-      {(liveUrl || repoUrl || flow) && (
+      {(liveUrl || repoUrl || flow || comingSoon) && (
         <div className="mt-auto flex flex-wrap gap-3 pt-6">
           {linkButtons}
           {flow && flipToggle(false)}
